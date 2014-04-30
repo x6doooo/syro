@@ -1,0 +1,9 @@
+{   
+    "dashboard": {
+        "address": "127.0.0.1",
+        "port": 9527
+    },
+    "socketType": "udp4",
+    "interval": 5000,
+    "port": 9528
+}
