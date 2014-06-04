@@ -1,0 +1,88 @@
+#!/usr/bin/env node
+
+var com = require('commander');
+var colors = require('colors');
+var syro = require('../lib/syro');
+var path = require('path');
+var fs = require('fs');
+var ConDashboard = require('../lib/class/ConDashboard');
+var ConSeeker = require('../lib/class/ConSeeker');
+var ConBase = require('../lib/class/ConBase');
+
+com.version('0.0.1');
+
+function handle(type) {
+
+    var T = type.replace(/^\w/, function(m){
+        return m.toUpperCase();
+    });
+
+    syro['start' + T]();
+
+}
+
+com.command('init <type>')
+    .description('初始化配置文件: <type> is "seeker" or "dashboard"')
+    .action(function(type) {
+        
+/*
+        if (!type) {
+            ConBase.prototype.createConfigFile('seeker');
+            ConBase.prototype.createConfigFile('dashboard');
+            return;
+        }
+*/
+        
+        if (type != 'seeker' && type != 'dashboard') {
+            console.log('wrong arguments');
+            return;
+        }
+        ConBase.prototype.createConfigFile(type);      
+    });
+
+com.command('start')
+    .description('运行')
+    .action(function() {
+        var ls = fs.readdirSync(process.cwd());
+        var type = [];
+        ls.forEach(function(v) {
+            if (v == 'dashboard_conf.json') {
+                type.push(v);
+            }
+            if (v == 'seeker_conf.json') {
+                type.push(v);
+            }
+        });
+        if (type.length != 1) {
+            console.log("[ERR]当前目录配置文件不正确\n请执行以下操作:")
+            console.log("* 删除多余的配置文件")
+            console.log("* 使用syro init <type>初始化正确的配置文件");
+            console.log("* 根据需要修改配置文件参数")
+            return;
+        }
+        handle(type[0]);
+    });
+
+
+/*
+com.on('init', function() {
+    ConBase.prototype.createConfigFile('seeker');
+    ConBase.prototype.createConfigFile('dashboard');
+});
+
+com.on('dashboard', function() {
+    handle('dashboard');
+});
+
+com.on('seeker', function() {
+    handle('seeker');
+});
+*/
+/*Todo
+com.on('locate', function() {
+    require('../lib/service/readline/readline')();
+});
+*/
+com.parse(process.argv)
+
+
