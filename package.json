@@ -1,0 +1,50 @@
+{
+  "name": "syro",
+  "description": "realtime system monitor",
+  "preferGlobal": true,
+  "keywords": [
+    "monitor",
+    "dashboard",
+    "system",
+    "cpu",
+    "memory",
+    "realtime"
+  ],
+  "version": "0.0.1",
+  "author": "Dx.Yang <x6doooo@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/x6doooo/syro.git"
+  },
+  "bugs": {
+    "url": "http://github.com/x6doooo/syro/issues"
+  },
+  "dependencies": {
+    "socket.io": "*",
+    "express": "*",
+    "commander": "*",
+    "colors": ">=0.6",
+    "ejs": "*",
+    "nsutil": "*"
+  },
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-copy": "~0.4.0"
+  },
+  "license": [
+    {
+      "type" : "MIT",
+      "url" : "https://github.com/x6doooo/syro/raw/master/LICENSE-MIT"
+    }
+  ],
+  "engines": [
+    "node >= 0.8.0"
+  ],
+  "main": "./lib/syro.js",
+  "bin": "./bin/syro",
+  "homepage": "https://github.com/x6doooo/syro"
+}
