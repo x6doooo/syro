@@ -9,7 +9,9 @@ var ConDashboard = require('../lib/class/ConDashboard');
 var ConSeeker = require('../lib/class/ConSeeker');
 var ConBase = require('../lib/class/ConBase');
 
-com.version('0.0.1');
+var web = require('../web/web.js');
+
+//com.version('0.0.1');
 
 function handle(type) {
 
@@ -17,7 +19,15 @@ function handle(type) {
         return m.toUpperCase();
     });
 
-    syro['start' + T]();
+    if (type == 'seeker') {
+        syro['start' + T]();
+        return;
+    }
+
+    if (type == 'dashboard') {
+        web.start();
+        return;
+    }
 
 }
 
@@ -47,10 +57,10 @@ com.command('start')
         var type = [];
         ls.forEach(function(v) {
             if (v == 'dashboard_conf.json') {
-                type.push(v);
+                type.push('dashboard');
             }
             if (v == 'seeker_conf.json') {
-                type.push(v);
+                type.push('seeker');
             }
         });
         if (type.length != 1) {
@@ -64,20 +74,6 @@ com.command('start')
     });
 
 
-/*
-com.on('init', function() {
-    ConBase.prototype.createConfigFile('seeker');
-    ConBase.prototype.createConfigFile('dashboard');
-});
-
-com.on('dashboard', function() {
-    handle('dashboard');
-});
-
-com.on('seeker', function() {
-    handle('seeker');
-});
-*/
 /*Todo
 com.on('locate', function() {
     require('../lib/service/readline/readline')();
