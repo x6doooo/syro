@@ -3,6 +3,6 @@
         "127.0.0.1": [ 9528 ]
     },
     "socketType": "udp4",
-    "interval": 5000,
+    "webport": 1337,
     "port": 9527
 }

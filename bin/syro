@@ -11,7 +11,7 @@ var ConBase = require('../lib/class/ConBase');
 
 var web = require('../web/web.js');
 
-//com.version('0.0.1');
+com.version('0.0.1');
 
 function handle(type) {
 
@@ -20,7 +20,8 @@ function handle(type) {
     });
 
     if (type == 'seeker') {
-        syro['start' + T]();
+        var s = syro['start' + T]();
+        s.startPush();
         return;
     }
 
@@ -31,24 +32,26 @@ function handle(type) {
 
 }
 
+
 com.command('init <type>')
     .description('初始化配置文件: <type> is "seeker" or "dashboard"')
     .action(function(type) {
-        
-/*
+        /*
         if (!type) {
             ConBase.prototype.createConfigFile('seeker');
             ConBase.prototype.createConfigFile('dashboard');
             return;
         }
-*/
+        */
         
         if (type != 'seeker' && type != 'dashboard') {
             console.log('wrong arguments');
+            com.outputHelp();
             return;
         }
-        ConBase.prototype.createConfigFile(type);      
+        ConBase.prototype.createConfigFile(type);  
     });
+
 
 com.command('start')
     .description('运行')
@@ -72,7 +75,8 @@ com.command('start')
         }
         handle(type[0]);
     });
-
+/*
+*/
 
 /*Todo
 com.on('locate', function() {
