@@ -9,23 +9,25 @@ Real-Time System Monitor
 ## 安装
 	npm install syro -g
 
-## 使用
+## 简介
 
-    1. syro可以同时监测多台服务器(seeker)，同时需要一台中控服务器(dashboard)。
-    2. 中控服务器负责收集监测数据，并位用户提供WEB界面，查看被监测的服务器的实时系统数据。
-    3. 监测为实时服务，默认不提供数据持久化功能。用户可以根据自己需要，自行采用数据库保存数据。
+* syro是一个服务器系统数据实时监控程序，目前可监控Mac和Linux系统。
+* syro可以同时监测多台服务器(seeker)，同时需要一台中控服务器(dashboard)。
+* 中控服务器负责收集监测数据，并为用户提供WEB服务，用户可通过WEB页面查看被监测服务器的实时系统数据。
+* 监测为实时服务，默认不提供数据持久化功能。
 
+## 使用方法
 
-### 在被监测的机器上执行以下操作
+### 被监测服务器(seeker)
 
 	1. syro init seeker
 	2. syro start
 	
-### 在中控服务器上执行以下操作
+### 中控服务器(dashboard)
 	
 	1. syro init dashboard
 	2. syro start
-    3. visit http://localhost:1337/
+    3. 用浏览器打开http://localhost:1337/
 
 ## 配置
 

@@ -10,7 +10,7 @@
     "memory",
     "realtime"
   ],
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Dx.Yang <x6doooo@gmail.com>",
   "repository": {
     "type": "git",
@@ -42,7 +42,7 @@
     }
   ],
   "engines": [
-    "node >= 0.8.0"
+    "node >= 0.10.0"
   ],
   "main": "./lib/syro.js",
   "bin": "./bin/syro",

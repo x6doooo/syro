@@ -5,13 +5,11 @@ var colors = require('colors');
 var syro = require('../lib/syro');
 var path = require('path');
 var fs = require('fs');
-var ConDashboard = require('../lib/class/ConDashboard');
-var ConSeeker = require('../lib/class/ConSeeker');
 var ConBase = require('../lib/class/ConBase');
 
 var web = require('../web/web.js');
 
-com.version('0.0.1');
+com.version('0.0.3');
 
 function handle(type) {
 
