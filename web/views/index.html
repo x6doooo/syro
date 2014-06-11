@@ -1,0 +1,135 @@
+<% include inc/header.html %>
+<% include inc/nav.html %>
+
+    <!-- 节点 -->
+    <!--div class="left-wrap"></div-->
+    <div class="main-wrap color-lightblue f12 ovl p30"> <!-- back-deep -->
+    </div>
+
+    <script id="mathine-template" type="text/x-handlebars-template">
+    <div class="mathine-box fl ml10 mr10" id="{{uuid}}">
+        <p class="tit f14 pl10">
+            <span class="mathine-uuid">{{hostname}} - {{ip}}</span>
+            <em class="color-red none tit-warning">(<i class="icon-warning-sign"></i>disconnect)</em>
+            <!--a class="go-detail-btn fr mr10 f12" href="javascript:;">Detail <i class="icon-arrow-right"></i></a-->
+            <span class="fr mr10 f12 os-uptime">-</span>
+        </p>
+        <table class="data-table w">
+        <!--tr>
+            <td class="td-fst tr pr20" width="60px">Uptime</td>
+            <td width="120px">
+                <span class="os-uptime color-white" data-color="color-white">-</span>
+            </td>
+            <td width="120px"></td>
+            <td width="120px"></td>
+        </tr-->
+        <tr>
+            <td class="td-fst tr pr20 nbr" width="60px">CPU</td>
+            <td class="nbr" width="120px">
+                user <span class="color-white cpu-user" data-color="color-white">-</span>
+            </td>
+            <td class="nbr" width="120px">
+                sys <span class="color-white cpu-sys" data-color="color-white">-</span>
+            </td>
+            <td class="nbr" width="120px">
+                idle <span class="color-white cpu-idle" data-color="color-white">-</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <div class="chart-div chart-cpu"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="td-fst tr pr20">LoadAvg</td>
+            <td>
+                1min <span class="color-white loadavg-1min" data-color="color-white">-</span>
+            </td>
+            <td>
+                5min <span class="color-white loadavg-5min" data-color="color-white">-</span>
+            </td>
+            <td>
+                15min <span class="color-white loadavg-15min" data-color="color-white">-</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="td-fst tr pr20">Mem</td>
+            <td class="">
+                used <span class="color-white mem-used" data-color="color-white">-</span>
+            </td>
+            <td class="" colspan="2">
+                <span class="color-white mem-detail" data-color="color-white">-</span>
+            <!--/td>
+            <td class=""-->
+            </td>
+        </tr>
+        <tr>
+            <td class="td-fst tr pr20">Disks</td>
+            <td>
+                used <span class="color-white disk-used-num" data-color="color-white">-</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="color-white disk-used" data-color="color-white">-</span>
+            </td>
+            <td>
+                <!--read <span class="color-white disk-read" data-color="color-white">-</span>
+                <b class="ml10 mr10"> | </b>
+                written <span class="color-white disk-written" data-color="color-white">-</span>
+                <b class="ml10 mr10"> | </b>-->
+                total <span class="color-white disk-total" data-color="color-white">-</span><br>
+                free <span class="color-white disk-free" data-color="color-white">-</span>
+            </td>
+            <td>
+                write <span class="color-white disk-write-KBps" data-color="color-white"></span><br>
+                read <span class="color-white disk-read-KBps" data-color="color-white"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="td-fst tr pr20 nbr">Network</td>
+            <td class="nbr">
+                &nbsp;&nbsp;in <span class="color-white network-in" data-color="color-white"></span>
+                <!--b class="ml10 mr10"> | </b-->
+            </td>
+            <td class="nbr">
+                <span class="color-white network-in-total" data-color="color-white"></span>
+            </td>
+            <td class="nbr">
+                <span class="color-white network-in-pkts" data-color="color-white"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <div class="chart-div chart-network-in"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="td-fst tr pr20 nbr">Network</td>
+            <td class="nbr">
+                out <span class="color-white network-out" data-color="color-white"></span>
+                <!--b class="ml10 mr10"> | </b-->
+            </td>
+            <td class="nbr">
+                <span class="color-white network-out-total" data-color="color-white"></span>
+            </td>
+            <td class="nbr">
+                <span class="color-white network-out-pkts" data-color="color-white"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <div class="chart-div chart-network-out"></div>
+            </td>
+        </tr>
+        </table>
+        <!--div class="chart-div chart-cpu pt5"></div-->
+        <!--div class="chart-div chart-mem pt5"></div-->
+        <!--div class="chart-div chart-network-in pt5"></div-->
+        <!--div class="chart-div chart-network-out pt5"></div-->
+    </div>
+    </script>
+
+    <script>
+    seajs.use('apps/index-init');
+    </script>
+
+
+<% include inc/footer.html %>

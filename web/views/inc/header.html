@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title> SYRO </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link media="screen" href="/public/css/styles.css" type="text/css" rel="stylesheet"/>
+    <link media="screen" href="/public/css/page/main.css" type="text/css" rel="stylesheet"/>
+    <script src="/public/js/scripts.js"></script>
+    <script src="/public/js/base/socket.io.1.js"></script>
+    <script>
+    seajs.config({
+        locale: 'zh-cn',
+        base:'/public/js',
+        map: [
+            [ /^(.*\.(?:css|js))(.*)$/i, '$1?' + Date.now() ]
+        ]
+    });
+    </script>
+</head>
+<body class="f12">
