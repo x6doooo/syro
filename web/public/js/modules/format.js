@@ -7,6 +7,7 @@ var G = function() {
 
 // 格式化byte数量级
 G.prototype.formatByteUnit = function(v) {
+/*
     var rt;
     var levels = [
         1024 * 1024 * 1024,' GiB',
@@ -27,20 +28,17 @@ G.prototype.formatByteUnit = function(v) {
         rt = '0 B';
     }
     return rt;
-/*
+    */
+/**/
+    if (v == undefined) return;
     var n = 0;
-    var tem;
     var u = ['B', 'KB', 'MB', 'GB'];
-    while (true) {
-        tem = num / 1024;
-        if (tem < 1) {
-            break;
-        }
-        num = tem;
+    while(v > 1024 && n < u.length - 1){
+        v /= 1024;
         n++;
     }
-    return num.toFixed(2) + ' ' + u[n];
-*/
+    return v.toFixed(2) + ' ' + u[n];
+/**/
 };
 
 // 分配数据给worker
