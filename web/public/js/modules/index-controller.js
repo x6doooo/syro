@@ -49,6 +49,8 @@ define(function(require, exports, module){
         var self = this;
         if (re && worker['print_' + msg.data.name]) {
             worker['print_' + msg.data.name](re, msg);
+            //界面的status更改
+            worker.el.find('.tit-warning').hide();
         }
     };
 
@@ -91,7 +93,7 @@ define(function(require, exports, module){
                 };
             }
             cfg.yAxis.min = 0;
-            console.log(cfg);
+            //console.log(cfg);
             self.el.find('.chart-' + v).highcharts(cfg);
             charts[v] = self.el.find('.chart-' + v).highcharts();
         });
@@ -219,13 +221,12 @@ define(function(require, exports, module){
         var self = this;
         var read_Bps = 0;
         var write_Bps = 0;
-        if (data.rt != 0) read_Bps = data.rb / data.rt * 1000;
-        if (data.wt != 0) write_Bps = data.wb / data.wt * 1000;
+        if (data.rt != 0) read_Bps = data.rb / data.rt;
+        if (data.wt != 0) write_Bps = data.wb / data.wt;
 
         self.print('.disk-read-KBps', self.man.formatByteUnit(read_Bps) + '/s');
         self.print('.disk-write-KBps', self.man.formatByteUnit(write_Bps) + '/s');
     };
-
 
 
 /*
@@ -296,19 +297,30 @@ define(function(require, exports, module){
         var socket = this.socket = io.connect();
         socket.emit('join', 'index');
         //socket.join('index');
+        socket.on('status', function(data) {
+            ctr.handle('status', data);
+        });
+
         socket.on('result', function(data) {
             /*
             if (data.msg.data.name == 'netIO') {
                 console.log(data);
             }*/
-            //console.log(data.msg.data.name);
-            ctr.handle(data);
+            ctr.handle('result', data);
         });
         ctr.fmt = new fmt.master;
     };
 
-    ctr.handle = function(data) {
-        ctr.fmt.handle(data.msg, data.rinfo);
+    ctr.handle = function(type, data) {
+        if (type == 'status') {
+            //ctr.fmt.handle();
+            var w = ctr.fmt.workers[data.rinfo.split(':')[0]];
+            w.el.find('.tit-warning').show();
+            //ctr.fmt.handle(data.msg, data.rinfo, true);
+        }
+        if (type == 'result') {
+            ctr.fmt.handle(data.msg, data.rinfo);
+        }
     };
 
     module.exports = ctr;
