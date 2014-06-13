@@ -41,6 +41,38 @@ var connections = 0;
 
 var dasher = syro.startDashboard();
 
+// console.log(dasher.udper);
+
+/**
+* 处理通信方的状态
+*/
+var d_udper = dasher.udper;
+
+if (d_udper.friendsTimer) {
+    clearInterval(d_udper.friendsTimer);
+    d_udper.friendsTimer = null;
+}
+
+d_udper.friendsLiveTimeLimit = 15 * 1000;
+
+d_udper.friendsTimer = setInterval(function() {
+    var friends = d_udper.friends;
+    var line = Date.now() - d_udper.friendsLiveTimeLimit;
+    var tem;
+    for (var addr in friends) {
+        tem = friends[addr];
+        if (tem.lastUpdate < line && tem.status == 'alive') {
+            tem.status = 'offline';
+            io.sockets.in('index').emit('status', {
+                rinfo: addr,
+                msg: tem.status
+            });
+        }
+        //console.log(addr, tem, line);
+    }
+}, d_udper.friendsLiveTimeLimit);
+
+
 /* @todo
 dasher.checkSeekerStatus = function() {
     var self = this;
@@ -69,6 +101,8 @@ dasher.updateSeekersStatus = function(msg, rinfo) {
 */
 
 dasher.result = function(msg, rinfo) {
+
+    //console.log(dasher.);
 
     io.sockets.in('index').emit('result', {
         rinfo: rinfo,
