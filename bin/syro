@@ -9,7 +9,7 @@ var ConBase = require('../lib/class/ConBase');
 
 var web = require('../web/web.js');
 
-com.version('0.1.0');
+com.version('0.1.1');
 
 function handle(type) {
 
