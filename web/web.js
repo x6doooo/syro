@@ -73,28 +73,6 @@ d_udper.friendsTimer = setInterval(function() {
 }, d_udper.friendsLiveTimeLimit);
 
 
-/* @todo
-dasher.checkSeekerStatus = function() {
-    var self = this;
-    var lastUpdate = self.lastUpdate;
-    setTimeout(function() {
-        var now = Date.now();
-        for (var id in lastUpdate) {
-            if (lastUpdate[id] - now > 10 * 1000) {
-                lastUpdate[id] = 'miss';
-            }
-        }
-    }, 30 * 1000);
-};
-
-dasher.updateSeekersStatus = function(msg, rinfo) {
-    var self = this;
-    var lastUpdate = self.lastUpdate;
-    var id = rinfo.address + '-' + rinfo.port;
-    lastUpdate[id] = Date.now();
-};
-*/
-
 /**
 * 通过房间名管理不同页面的数据
 * index or rinfo.address + '-' + rinfo.port
