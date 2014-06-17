@@ -1,4 +1,4 @@
-/*! syro - v0.0.1 - 2014-05-05 */
+/*! syro - v0.1.1 - 2014-06-16 */
 define(function(require, exports, module){
 var G = function() {
     // 每个worker控制一个seeker的数据
@@ -7,7 +7,6 @@ var G = function() {
 
 // 格式化byte数量级
 G.prototype.formatByteUnit = function(v) {
-/*
     var rt;
     var levels = [
         1024 * 1024 * 1024,' GiB',
@@ -28,17 +27,6 @@ G.prototype.formatByteUnit = function(v) {
         rt = '0 B';
     }
     return rt;
-    */
-/**/
-    if (v == undefined) return;
-    var n = 0;
-    var u = ['B', 'KB', 'MB', 'GB'];
-    while(v > 1024 && n < u.length - 1){
-        v /= 1024;
-        n++;
-    }
-    return v.toFixed(2) + ' ' + u[n];
-/**/
 };
 
 // 分配数据给worker
@@ -181,50 +169,28 @@ L.prototype.loadavg = function(data) {
     return data.data.data;  
 };
 
-L.prototype.diskUsage = function(data) {
-    return data.data.data;
-};
-
-L.prototype.diskIO = function(data) {
+L.prototype.disk = function(data) {
+    var self = data;
     data = data.data.data;
     var self = this;
-    //var total = 0;
-    //var used = 0;
-    var res = {
-        rb: 0,
-        wb: 0,
-        rt: 0,
-        wt: 0
-    };
-    var tem;
-    for (var key in data) {
-        tem = data[key];
-        res.rb += tem.read_bytes;
-        res.wb += tem.write_bytes;
-        res.rt += tem.read_time;
-        res.wt += tem.write_time;
-    }
-    if (!tem) return;
+    var total = 0;
+    var used = 0;
 
-    var rdata;
-    if (!self.cache.diskIO) {
-        self.cache.diskIO = res;
-    } else {
-        rdata = {};
-        for (var k in res) {
-            rdata[k] = res[k] - self.cache.diskIO[k];
-        }
-        self.cache.diskIO = res;
+    if (!self.cache.disk) {
+        self.cache.disk = {};
     }
-    return rdata;
+
+    data.forEach(function(v) {
+        total += v.total * 1;
+        used += v.used * 1;
+    })
+    return {
+        total: total,
+        used: used
+    };
 };
 
-//L.prototype.netIO = function(data) {
-    //console.log(data.timestamp);
-    //console.log(data.data.data);
-//};
-
-L.prototype.netIO = function(data) {
+L.prototype.network = function(data) {
     var src = data;
     data = data.data.data;
     var self = this;
@@ -242,18 +208,13 @@ L.prototype.netIO = function(data) {
      *
      * */
 
-    for (var key1 in data) {
-        var v = data[key1];
+    data.forEach(function(v) {
         for (key in v) {
+            if (key == 'name') continue;
             if (tem[key] === undefined) tem[key] = 0;
             tem[key] += v[key] * 1;
         }
-    }
-    //console.log(tem);
-    /*
-    data.forEach(function(v) {
     });
-    */
 
     if (cache && cache.timestamp) {
         
