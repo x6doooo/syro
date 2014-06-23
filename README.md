@@ -74,5 +74,32 @@ syro init dashboard //=> dashboard_conf.json 中控服务器的配置
         "port": 9527
     }
 
+### dashboard_conf.json包含的字段
+
+#### socketType
+    
+通过此协议向被监测服务器发送数据
+
+默认使用udp4
+
+    "socketType": "udp4"    
+    
+#### port
+
+本机用于通信的端口
+
+默认使用9527
+
+    "port": 9527
+
+#### seekers
+
+向此中控服务器发送数据的被监测服务器
+    
+    "seekers": {
+        "127.0.0.1": [ 9528 ],
+        "10.0.0.1":  [ 9528 ]
+    }
+
 
 
