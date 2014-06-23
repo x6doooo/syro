@@ -31,5 +31,48 @@ Real-Time System Monitor
 
 ## 配置
 
-    todo
+使用syro init命令可以在当前目录下生成相应的配置文件，例如：
+
+```js
+syro init seeker //=> seeker_conf.json 被监测服务器的配置
+    
+syro init dashboard //=> dashboard_conf.json 中控服务器的配置
+```
+
+### seeker_conf.json包含的字段
+
+#### socketType
+    
+被检测服务器采集数据后，通过此协议，向中控服务器发送数据
+
+默认使用udp4
+
+    "socketType": "udp4"    
+    
+#### port
+
+本机用于通信的端口
+
+默认使用9528
+
+    "port": 9528
+
+#### interval
+
+采集数据的频率，单位ms
+
+默认1000ms
+    
+    "interval": 1000
+
+#### dashboard
+
+中控服务器的地址和端口
+    
+    "dashboard": {
+        "address": "127.0.0.1",
+        "port": 9527
+    }
+
+
 
